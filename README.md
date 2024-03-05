@@ -1,7 +1,7 @@
 # PopulationByZipCode
 This project uses Flask to launch a web server on port 5000. From the web page users will be able to query the DB to get information and update the DB if needed. This project uses XML or JSON-packed messages to transport data. This project is hosted on a Raspberry Pi zero W. **All of the steps will be done using the terminal on the Raspberry Pi unless specifically stated otherwise.**
 
-So far this documentation outlines the steps for setting up a LAMP (Linux, Apache, MariaDB, PHP) stack on a Raspberry Pi, securing the MariaDB root password, transferring a .csv file from a Windows machine to the Raspberry Pi, and importing the data into a MariaDB database.  **This project is ongoing and so this documentation is a work in progress and will be built upon as continue working.**
+This documentation outlines the steps for setting up a LAMP (Linux, Apache, MariaDB, PHP) stack on a Raspberry Pi, securing the MariaDB root password, transferring a .csv file from a Windows machine to the Raspberry Pi, importing the data into a MariaDB database, and launching the web server.
 
 ## Setting Up LAMP Stack on Raspberry Pi with MariaDB
 
@@ -33,10 +33,13 @@ In the pi terminal:
 (Follow the prompts/installation wizard.)
 
 5. **Install PHP, PHP SQL extension, and phpMyAdmin**:
-- Installs PHP, the PHP SQL extension.
+- Installs PHP, the PHP SQL extension, and phpMyAdmin.
 
 In the pi terminal:
 **sudo apt install php libapache2-mod-php php-mysql -y**
+
+then
+
 **sudo apt install phpmyadmin -y** (This command will launch an install wizard and prompt you for some input)
 
 During the installation process, you will be prompted to configure phpMyAdmin. Choose Apache as the web server that should be automatically configured to run phpMyAdmin, it may prompt you for your MariaDB root username (this will just be **root**) and then ask you to provide your MariaDB root password when prompted **(only enter a password if you did step 4: Secure MariaDB Installation (optional), otherwise leave the password blank)**
@@ -87,12 +90,12 @@ Open a command propmt on the Windows machine that contains the data you want to 
 In the command prompt:
 **pscp C:\path\to\your\file.csv yourUsername@yourPisIPv4Address:/path/to/destination**
 
-**(Be sure to replace YourUsername@YourPisIPv4Address with the proper username and ip address for your device, and \path\to\your\file.csv and /path/to/destination with the proper file paths on your respective machines.)**
+**(Be sure to replace YourUsername@YourPisIPv4Address with the proper username and ip address for your device, and \path\to\your\file.csv and /path/to/destination with the proper file paths on your respective achines.)**
 
 2. **Importing Data into MariaDB Database**
-- There are a few ways to accomplish this task. I will be using a python script named zipcodes.py that reads zip code information from a CSV file (CNE350_zip_code_database.csv) into a Pandas DataFrame called tables and writes data from tables to a table named zipcodes in my population_by_zip database.
+- There are a few ways to accomplish this task. I will be using a python script named zipcodes.py that reads zip code information from a CSV file into a Pandas DataFrame called tables and writes data from tables to a table named zipcodes in my population_by_zip database.
 
-First you will need to modify lines 13 and 18 in zipcodes.py to match the name of your database and the path on your device to your .csv file run **zipcodes.py** you should see some output once it's completed.
+First you will need to modify lines 13 and 18 in zipcodes.py to match the name of your database and the path on your Pi to the .csv file, then run **zipcodes.py** and you should see some output once it's completed.
 
 Something along the lines of:
 
@@ -115,7 +118,7 @@ Enter your MariaDB root user password:
 
 ## Starting your Flask server
 1. **Modify rest_web.py**
-- You will need to modify lines 23 and 26-28 to match your own Raspberry Pi IP address and your own mysql.connector.connect configuration in order to properly connect to your database.
+- You will need to modify lines 23 and 28 to match your Raspberry Pi IP address and your database name.
 
 2. **Modify login.html**
 - You will need to modify lines 3 and 8 in login.html to match the IP address of your Raspberry Pi or you will not be properly redirected when you use the search and update features on the web page. You should keep the port as 5000 since Flask runs on port 5000 in development mode by default.

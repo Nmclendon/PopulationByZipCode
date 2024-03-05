@@ -90,6 +90,52 @@ In the command prompt:
 **(Be sure to replace YourUsername@YourPisIPv4Address with the proper username and ip address for your device, and \path\to\your\file.csv and /path/to/destination with the proper file paths on your respective machines.)**
 
 2. **Importing Data into MariaDB Database**
-- There are a few ways to accomplish this task. I will be using a python script that imports the data from the .csv file on my Pi into a MariaDB database.
+- There are a few ways to accomplish this task. I will be using a python script named zipcodes.py that reads zip code information from a CSV file (CNE350_zip_code_database.csv) into a Pandas DataFrame called tables and writes data from tables to a table named zipcodes in my population_by_zip database.
 
-  # Project to continue from here.
+First you will need to modify lines 13 and 18 in zipcodes.py to match the name of your database and the path on your device to your .csv file run **zipcodes.py** you should see some output once it's completed.
+
+Something along the lines of:
+
+Enter your MariaDB root user password:
+* _ zip  Population
+* 0        501         562
+* 1        544           0
+* 2        601           0
+* 3        602           0
+* 4        603           0
+* ...      ...         ...
+* 42627  99926        1140
+* 42628  99927          48
+* 42629  99928        1530
+* 42630  99929        2145
+* 42631  99950         262
+
+* [42632 rows x 2 columns]
+
+
+## Starting your Flask server
+1. **Modify rest_web.py**
+- You will need to modify lines 23 and 26-28 to match your own Raspberry Pi IP address and your own mysql.connector.connect configuration in order to properly connect to your database.
+
+2. **Modify login.html**
+- You will need to modify lines 3 and 8 in login.html to match the IP address of your Raspberry Pi or you will not be properly redirected when you use the search and update features on the web page. You should keep the port as 5000 since Flask runs on port 5000 in development mode by default.
+
+3. **Start the Flask server** 
+- Do this by running **rest_web.py** which is located in the rest_web subdirectory of this project.
+
+You should see some output that looks like:
+
+Enter your MariaDB root user password:
+ * Serving Flask app "rest_web" (lazy loading)
+ * Environment: production
+ *  WARNING: This is a development server. Do not use it in a production deployment.
+ *  Use a production WSGI server instead.
+ * Debug mode: on
+ * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+192.168.0.37 - - [05/Mar/2024 10:30:34] "GET / HTTP/1.1" 200 -
+
+4. **Test your web application**
+- Make sure everything is working properly by opening a browser on a device that's on the same network as your Pi and typing **http://YourPiIPaddressHere:5000** (replacing YourPiIPaddressHere with the IP address of your Raspberry Pi) You should be brough to a plain web page with the search and update feilds.
+
+Try running a few searches and updates and verify that the information coming back is correct.
+

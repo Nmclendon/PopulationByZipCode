@@ -12,6 +12,7 @@
 #https://stackoverflow.com/questions/7478366/create-dynamic-urls-in-flask-with-url-for
 #https://github.com/vimalloc/flask-jwt-extended/issues/175
 #https://stackoverflow.com/questions/54424071/prevent-flask-reload-on-change Stops flask from reloading on launch while in dev mode.
+#https://docs.python.org/3/library/getpass.html Shows how to hide your password input using the getpass package.
 
 
 from getpass import getpass

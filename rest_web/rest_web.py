@@ -63,13 +63,13 @@ def updateZipPop(updateZip, updatePop):
 def update():
        user = request.form['uzip']
        user2 = request.form['upop']
-       return redirect(url_for('updateZipPop', updateZip=user, updatePop=user2, _external=True))
+       return redirect(url_for('updateZipPop', updateZip=user, updatePop=user2))
 
 #search page
 @app.route('/search', methods=['GET'])
 def search():
        user = request.args.get('sZip')
-       return redirect(url_for('searchZip', searchZip=user, _external=True))
+       return redirect(url_for('searchZip', searchZip=user))
 
 
 #root of web server and gots to template (login.html)

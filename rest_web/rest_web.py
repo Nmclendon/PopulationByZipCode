@@ -22,7 +22,6 @@ import mysql.connector
 
 app = Flask(__name__, static_url_path='')
 # Set the SERVER_NAME directly in app config
-app.config['SERVER_NAME'] = 'YourPiIPaddressHere:5000'
 
 #connect to database
 conn = mysql.connector.connect(user='root', password=getpass("Enter your MariaDB root user password: "),

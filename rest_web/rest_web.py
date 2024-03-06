@@ -11,6 +11,7 @@
 #https://stackoverflow.com/questions/1081750/python-update-multiple-columns-with-python-variables
 #https://stackoverflow.com/questions/7478366/create-dynamic-urls-in-flask-with-url-for
 #https://github.com/vimalloc/flask-jwt-extended/issues/175
+#https://stackoverflow.com/questions/54424071/prevent-flask-reload-on-change Stops flask from reloading on launch while in dev mode.
 
 
 from getpass import getpass
@@ -78,6 +79,6 @@ def root():
 
 #main
 if __name__ == '__main__':
-   app.run(host='0.0.0.0', debug=True)
+   app.run(host='0.0.0.0', debug=True, use_reloader=False)
 
 

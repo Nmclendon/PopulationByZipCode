@@ -142,3 +142,6 @@ Enter your MariaDB root user password:
 
 Try running a few searches and updates and verify that the information coming back is correct.
 
+# Credits 
+Special thanks to Justin Ellis for providing the foundation for this code. This is mostly just a repurposed version of his rest_web.py States project found here: https://github.com/ellisju37073/States/tree/main/states/rest_web
+
